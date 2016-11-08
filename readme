@@ -1,0 +1,25 @@
+
+-------------------HAWKX------------------------
+
+
+when it receives the PASSWORD over the UDP port defined it runs the command
+in simsim.h processPacket().
+currently runs iptables -I INPUT -s <IP ADD> -j ACCEPT
+
+to trigger the command to be run use the command;
+echo <PASSWORD> | nc -u 192.168.0.1 22
+
+
+# Allow established connections
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+#default drop rule
+iptables -A INPUT -j DROP
+
+
+
+To Do
+---------
+Stick UDP Port, Password & Command in Config File
+
+
